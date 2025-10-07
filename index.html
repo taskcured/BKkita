@@ -82,13 +82,11 @@
                 <button id="show-student-login-btn" class="w-full py-4 px-6 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-200/50 transition-all duration-300 transform hover:scale-[1.01]">
                     Masuk Sebagai Siswa
                 </button>
-                <div class="flex items-center">
-                    <hr class="flex-grow border-t border-gray-200">
-                    <span class="mx-4 text-gray-400 text-sm font-medium">ATAU</span>
-                    <hr class="flex-grow border-t border-gray-200">
-                </div>
                 <button id="show-admin-login-btn" class="w-full py-4 px-6 bg-gray-700 hover:bg-gray-800 text-white font-bold rounded-xl shadow-lg shadow-gray-300/50 transition-all duration-300 transform hover:scale-[1.01]">
-                    Masuk Sebagai Admin
+                    Masuk Sebagai Guru BK
+                </button>
+                <button id="show-super-admin-login-btn" class="w-full mt-4 py-3 px-6 bg-red-700 hover:bg-red-800 text-white font-bold rounded-xl shadow-lg shadow-red-300/50 transition-all duration-300 transform hover:scale-[1.01]">
+                    Masuk Sebagai Super Admin
                 </button>
             </div>
         </div>
@@ -111,7 +109,7 @@
 
         <!-- Admin Login View -->
         <div id="admin-login-view" class="view hidden">
-            <h1 class="text-3xl font-bold text-center text-gray-800 mb-4">Masuk Admin BK</h1>
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-4">Masuk Guru BK</h1>
             <p class="text-center text-gray-600 mb-8">Masukkan nama dan password Anda.</p>
             <div class="space-y-4 max-w-sm mx-auto">
                 <input type="text" id="admin-name-input" placeholder="Nama Admin (Gofar/Rohman)" class="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-4 focus:ring-blue-100 transition-shadow">
@@ -120,6 +118,22 @@
                     Masuk
                 </button>
                 <button id="admin-back-btn-from-login" class="w-full py-3 px-6 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-xl transition-colors duration-300">
+                    Kembali
+                </button>
+            </div>
+        </div>
+        
+        <!-- Super Admin Login View -->
+        <div id="super-admin-login-view" class="view hidden">
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-4">Masuk Super Admin</h1>
+            <p class="text-center text-gray-600 mb-8">Area ini hanya untuk Super Admin.</p>
+            <div class="space-y-4 max-w-sm mx-auto">
+                <input type="text" id="super-admin-name-input" placeholder="Nama Super Admin" class="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-4 focus:ring-red-100 transition-shadow">
+                <input type="password" id="super-admin-password" placeholder="Password" class="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-4 focus:ring-red-100 transition-shadow">
+                <button id="super-admin-login-btn" class="w-full py-4 px-6 bg-red-700 hover:bg-red-800 text-white font-bold rounded-xl shadow-md transition-colors duration-300">
+                    Masuk
+                </button>
+                <button id="super-admin-back-btn" class="w-full py-3 px-6 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-xl transition-colors duration-300">
                     Kembali
                 </button>
             </div>
@@ -229,22 +243,19 @@
         <!-- Admin Dashboard View -->
         <div id="admin-dashboard-view" class="view hidden">
             <header class="flex flex-col md:flex-row justify-between items-start md:items-center pb-4 border-b border-gray-200 mb-6">
-                <h1 class="text-2xl font-bold text-gray-800 mb-2 md:mb-0">Dasbor Admin <span id="admin-name-header" class="text-blue-600"></span></h1>
+                <h1 class="text-2xl font-bold text-gray-800 mb-2 md:mb-0">Dasbor Guru BK <span id="admin-name-header" class="text-blue-600"></span></h1>
                 <button id="admin-logout-btn" class="py-2 px-4 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium transition-colors duration-300 shadow-md">
                     Keluar
                 </button>
             </header>
             
-            <!-- Tab Navigation for Admin (Pills style) -->
+            <!-- Tab Navigation for Admin (Pills style) - Kelola Akun REMOVED -->
             <div class="flex bg-gray-100 p-1 rounded-xl mb-8 overflow-x-auto">
                 <button id="admin-tab-appointments" class="flex-1 py-2 px-4 whitespace-nowrap text-center text-sm font-semibold transition-all duration-300 rounded-lg bg-white shadow-sm text-blue-600">
                     🛎️ Permintaan Janji Temu
                 </button>
                 <button id="admin-tab-add-article" class="flex-1 py-2 px-4 whitespace-nowrap text-center text-sm font-medium focus:outline-none transition-all duration-300 text-gray-600 hover:bg-white hover:shadow-sm rounded-lg">
                     ✍️ Tambah Materi
-                </button>
-                <button id="admin-tab-manage-accounts" class="flex-1 py-2 px-4 whitespace-nowrap text-center text-sm font-medium focus:outline-none transition-all duration-300 text-gray-600 hover:bg-white hover:shadow-sm rounded-lg">
-                    👥 Kelola Akun
                 </button>
                 <button id="admin-tab-change-password" class="flex-1 py-2 px-4 whitespace-nowrap text-center text-sm font-medium focus:outline-none transition-all duration-300 text-gray-600 hover:bg-white hover:shadow-sm rounded-lg">
                     🔑 Ganti Password
@@ -273,29 +284,6 @@
                     </div>
                 </div>
                 
-                <!-- Admin Tab Kelola Akun - UPDATED WITH NEW STUDENT CREATION -->
-                <div id="admin-content-manage-accounts" class="tab-content hidden">
-                    <h2 class="text-2xl font-extrabold mb-6 text-gray-800">Kelola Akun Siswa</h2>
-
-                    <!-- NEW: Tambah Akun Siswa Baru -->
-                    <div class="bg-blue-50 rounded-xl p-6 shadow-md mb-8">
-                        <h3 class="text-xl font-bold text-blue-700 mb-4">➕ Tambah Akun Siswa Baru</h3>
-                        <p class="text-sm text-gray-600 mb-4">Password akan diatur secara otomatis ke **'12345'**.</p>
-                        <div class="flex space-x-3">
-                            <input type="text" id="new-student-name-input" placeholder="Nama Siswa Baru (cth: Ani)" class="flex-grow p-3 rounded-xl border border-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-100 transition-shadow">
-                            <button id="add-new-student-btn" class="py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition-colors duration-300">
-                                Buat Akun
-                            </button>
-                        </div>
-                    </div>
-
-                    <h3 class="text-xl font-extrabold mb-4 text-gray-800">Daftar Akun Siswa</h3>
-                    <p class="text-gray-600 mb-4">Pilih nama siswa untuk mereset password atau menghapus akun.</p>
-                    <div id="user-list-for-reset" class="space-y-3 p-4 bg-white rounded-xl shadow-md">
-                        <!-- User list for password reset -->
-                    </div>
-                </div>
-                
                 <!-- Admin Tab Ganti Password -->
                 <div id="admin-content-change-password" class="tab-content hidden">
                     <h2 class="text-2xl font-extrabold mb-6 text-gray-800">Ganti Password Anda</h2>
@@ -308,9 +296,53 @@
                         </button>
                     </div>
                 </div>
-
             </div>
         </div>
+        
+        <!-- Super Admin Dashboard View -->
+        <div id="super-admin-dashboard-view" class="view hidden">
+            <header class="flex flex-col md:flex-row justify-between items-start md:items-center pb-4 border-b border-gray-200 mb-6">
+                <h1 class="text-2xl font-bold text-gray-800 mb-2 md:mb-0">Dasbor Super Admin: <span id="super-admin-name-header" class="text-red-600"></span></h1>
+                <button id="super-admin-logout-btn" class="py-2 px-4 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium transition-colors duration-300 shadow-md">
+                    Keluar
+                </button>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Create Account Section -->
+                <div class="bg-blue-50 rounded-xl p-6 shadow-md">
+                    <h3 class="text-xl font-bold text-blue-700 mb-4">➕ Buat Akun Baru</h3>
+                    <p class="text-sm text-gray-600 mb-4">Password default untuk semua akun baru adalah **'12345'**.</p>
+                    <div class="space-y-4">
+                        <input type="text" id="new-account-name-input" placeholder="Nama Pengguna Baru" class="w-full p-3 rounded-xl border border-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-100 transition-shadow">
+                        <select id="new-account-role-select" class="w-full p-3 rounded-xl border border-blue-200 focus:outline-none focus:ring-4 focus:ring-blue-100 transition-shadow bg-white">
+                            <option value="user">Siswa</option>
+                            <option value="admin">Guru BK</option>
+                        </select>
+                        <button id="create-new-account-btn" class="w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition-colors duration-300">
+                            Buat Akun
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Manage Accounts Section (Separated Lists) -->
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-extrabold text-gray-800 mb-2">Daftar Akun Guru BK</h3>
+                        <div id="admin-accounts-list" class="space-y-2 p-4 bg-white rounded-xl shadow-md max-h-60 overflow-y-auto">
+                            <!-- Admin accounts list will be rendered here -->
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-extrabold text-gray-800 mb-2">Daftar Akun Siswa</h3>
+                        <div id="student-accounts-list" class="space-y-2 p-4 bg-white rounded-xl shadow-md max-h-80 overflow-y-auto">
+                            <!-- Student accounts list will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- 1. Confirmation Modal (for Booking - with Category and Optional Reason) -->
         <div id="booking-confirmation-modal" class="modal hidden">
@@ -368,9 +400,10 @@
         let currentUser = null;
         let currentRole = null;
         const ADMIN_BYPASS_TOKEN = 'bypassadmin';
-        // UPDATED: Default student password is now '12345'
-        const DEFAULT_STUDENT_PASSWORD = '12345'; 
+        // UPDATED: Default account password is now '12345'
+        const DEFAULT_ACCOUNT_PASSWORD = '12345'; 
         const DEFAULT_ADMIN_PASSWORD = '123456';
+        const SUPER_ADMIN_PASSWORD = 'ssup';
 
         let pendingAppointment = null;
         let genericActionCallback = null; // Store the callback function for generic confirmation
@@ -382,11 +415,11 @@
         
         // Initial Mock Users (used if localStorage is empty)
         const MOCK_USERS = [
-            // Ensure mock users use the new default password for consistency
-            { name: 'Budi', role: 'user', password: DEFAULT_STUDENT_PASSWORD },
-            { name: 'Santi', role: 'user', password: DEFAULT_STUDENT_PASSWORD },
+            { name: 'Budi', role: 'user', password: DEFAULT_ACCOUNT_PASSWORD },
+            { name: 'Santi', role: 'user', password: DEFAULT_ACCOUNT_PASSWORD },
             { name: 'Gofar', role: 'admin', password: '123456' },
-            { name: 'Rohman', role: 'admin', password: '123456' }
+            { name: 'Rohman', role: 'admin', password: '123456' },
+            { name: 'taskcured', role: 'superadmin', password: SUPER_ADMIN_PASSWORD },
         ];
 
         // Counselor WhatsApp numbers (Example numbers)
@@ -411,11 +444,14 @@
         const loginView = document.getElementById('login-view');
         const studentLoginView = document.getElementById('student-login-view');
         const adminLoginView = document.getElementById('admin-login-view');
+        const superAdminLoginView = document.getElementById('super-admin-login-view');
         const userDashboardView = document.getElementById('user-dashboard-view');
         const adminDashboardView = document.getElementById('admin-dashboard-view');
+        const superAdminDashboardView = document.getElementById('super-admin-dashboard-view');
 
         const studentNameHeader = document.getElementById('student-name-header');
         const adminNameHeader = document.getElementById('admin-name-header');
+        const superAdminNameHeader = document.getElementById('super-admin-name-header');
 
         const gofarSlots = document.getElementById('gofar-slots');
         const rohmanSlots = document.getElementById('rohman-slots');
@@ -423,12 +459,9 @@
 
         const adminAppointmentList = document.getElementById('admin-appointment-list');
         const articleList = document.getElementById('article-list');
-        const userListForReset = document.getElementById('user-list-for-reset');
         
-        // New Student Creation Input
-        const newStudentNameInput = document.getElementById('new-student-name-input');
-        const addNewStudentBtn = document.getElementById('add-new-student-btn');
-
+        // Super Admin Elements
+        const createNewAccountBtn = document.getElementById('create-new-account-btn');
 
         // Booking Modal elements
         const bookingConfirmationModal = document.getElementById('booking-confirmation-modal');
@@ -562,57 +595,25 @@
         
         function getAppointmentSlots() {
             const slots = [];
-            const startTimeInMinutes = 6 * 60 + 30; // 06:30
-            const endTimeInMinutes = 15 * 60 + 30;   // 15:30
-            const slotDuration = 45;
+            for (let h = 7; h <= 15; h++) {
+                // Start at 7:15, then 7:45, 8:30, 9:15, etc.
+                for (let m = (h === 7 ? 15 : 0); m < 60; m += 45) {
+                    const nextM = m + 45;
+                    const nextH = h + Math.floor(nextM / 60);
+                    const nextMMod = nextM % 60;
+                    
+                    const startStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+                    const endStr = `${String(nextH).padStart(2, '0')}:${String(nextMMod).padStart(2, '0')}`;
+                    
+                    const timeSlot = `${startStr}-${endStr}`;
 
-            const breaks = [
-                { start: 9 * 60 + 30, end: 9 * 60 + 45 },   // 09:30 - 09:45
-                { start: 12 * 60 + 0, end: 12 * 60 + 45 },  // 12:00 - 12:45
-            ];
-
-            let currentMinutes = startTimeInMinutes;
-
-            while (currentMinutes < endTimeInMinutes) {
-                let slotStart = currentMinutes;
-                let slotEnd = slotStart + slotDuration;
-                
-                // If slot would end after working hours, break loop
-                if (slotEnd > endTimeInMinutes) {
-                    break;
-                }
-                
-                let inBreak = false;
-                for (const breakPeriod of breaks) {
-                    // Check if the proposed slot overlaps with this break
-                    if (slotStart < breakPeriod.end && slotEnd > breakPeriod.start) {
-                        // If it overlaps, jump the current time to the end of the break
-                        currentMinutes = breakPeriod.end;
-                        inBreak = true;
-                        break; // Exit the for...of loop for breaks
+                    // Skip break times
+                    const isBreak = (startStr === '09:30' || startStr === '12:00');
+                    if (!isBreak && nextH <= 16) {
+                        slots.push(timeSlot);
                     }
                 }
-                
-                // If we found a break, the while loop will continue with the new currentMinutes
-                if (inBreak) {
-                    continue;
-                }
-
-                // If no break, this is a valid slot
-                const startH = Math.floor(slotStart / 60);
-                const startM = slotStart % 60;
-                const endH = Math.floor(slotEnd / 60);
-                const endM = slotEnd % 60;
-
-                const startStr = `${String(startH).padStart(2, '0')}:${String(startM).padStart(2, '0')}`;
-                const endStr = `${String(endH).padStart(2, '0')}:${String(endM).padStart(2, '0')}`;
-                
-                slots.push(`${startStr}-${endStr}`);
-                
-                // Move to the next potential slot time
-                currentMinutes += slotDuration;
             }
-
             return slots;
         }
 
@@ -996,112 +997,123 @@
             showAlert('Materi motivasi baru berhasil ditambahkan!', 'success');
         }
         
-        // --- Admin: Manage Student Accounts (NEW) ---
+        // --- Super Admin Functions ---
 
-        function renderUserListForReset() {
-            userListForReset.innerHTML = '';
+        function renderAllAccounts() {
+            const adminAccountsList = document.getElementById('admin-accounts-list');
+            const studentAccountsList = document.getElementById('student-accounts-list');
+
+            adminAccountsList.innerHTML = '';
+            studentAccountsList.innerHTML = '';
+
+            const adminUsers = users.filter(u => u.role === 'admin').sort((a, b) => a.name.localeCompare(b.name));
             const studentUsers = users.filter(u => u.role === 'user').sort((a, b) => a.name.localeCompare(b.name));
-            
-            if (studentUsers.length === 0) {
-                userListForReset.innerHTML = '<p class="text-gray-500 italic">Belum ada akun siswa terdaftar.</p>';
-                return;
-            }
 
-            studentUsers.forEach(user => {
+            const createListItem = (user) => {
+                let roleText = user.role === 'admin' ? 'Guru BK' : 'Siswa';
+                let roleClass = user.role === 'admin' ? 'bg-gray-200 text-gray-800' : 'bg-blue-100 text-blue-800';
+
                 const userDiv = document.createElement('div');
                 userDiv.className = 'flex justify-between items-center p-3 border-b last:border-b-0 hover:bg-gray-50';
-                userDiv.innerHTML = `
-                    <p class="font-medium text-gray-800">${user.name}</p>
-                    <div class="flex space-x-2">
-                        <button class="reset-password-btn py-1 px-3 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg transition-colors" data-username="${user.name}">
-                            🔄 Reset Password
-                        </button>
-                        <button class="delete-account-btn py-1 px-3 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-lg transition-colors" data-username="${user.name}">
-                            🗑️ Hapus Akun
-                        </button>
-                    </div>
-                `;
-                userListForReset.appendChild(userDiv);
-            });
-            
-            // Attach reset listeners
-            document.querySelectorAll('.reset-password-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const userName = e.target.dataset.username;
-                    showGenericConfirmation(
-                        'Reset Password Siswa',
-                        `Apakah Anda yakin ingin mereset password untuk **${userName}** menjadi **'${DEFAULT_STUDENT_PASSWORD}'**?`,
-                        () => handleResetStudentPassword(userName),
-                        'bg-amber-600 hover:bg-amber-700'
-                    );
-                });
-            });
 
-            // Attach delete listeners
+                const deleteButtonHTML = `<button class="delete-account-btn py-1 px-3 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-lg transition-colors" data-username="${user.name}">
+                                            🗑️ Hapus
+                                        </button>`;
+                
+                userDiv.innerHTML = `
+                    <div>
+                        <p class="font-medium text-gray-800">${user.name}</p>
+                        <p class="text-xs font-semibold px-2 py-0.5 rounded-full inline-block ${roleClass}">${roleText}</p>
+                    </div>
+                    ${deleteButtonHTML}
+                `;
+                return userDiv;
+            };
+
+            if (adminUsers.length > 0) {
+                adminUsers.forEach(user => adminAccountsList.appendChild(createListItem(user)));
+            } else {
+                adminAccountsList.innerHTML = '<p class="text-gray-500 text-sm italic p-2">Tidak ada akun Guru BK.</p>';
+            }
+
+            if (studentUsers.length > 0) {
+                studentUsers.forEach(user => studentAccountsList.appendChild(createListItem(user)));
+            } else {
+                studentAccountsList.innerHTML = '<p class="text-gray-500 text-sm italic p-2">Tidak ada akun Siswa.</p>';
+            }
+
+            // Re-attach delete listeners
             document.querySelectorAll('.delete-account-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const userName = e.target.dataset.username;
+                    const userToDelete = users.find(u => u.name === userName);
+                    const isStudent = userToDelete && userToDelete.role === 'user';
+                    
+                    const confirmationText = isStudent 
+                        ? `Anda yakin ingin **menghapus permanen** akun siswa **${userName}**? Semua data janji temu terkait juga akan dihapus. Aksi ini tidak dapat dibatalkan.`
+                        : `Anda yakin ingin **menghapus permanen** akun Guru BK **${userName}**? Aksi ini tidak dapat dibatalkan.`;
+                    
                     showGenericConfirmation(
-                        'Hapus Akun Siswa',
-                        `Anda yakin ingin **menghapus permanen** akun **${userName}**? Semua data janji temu terkait juga akan dihapus. Aksi ini tidak dapat dibatalkan.`,
-                        () => handleDeleteStudentAccount(userName),
+                        'Hapus Akun',
+                        confirmationText,
+                        () => handleDeleteAccountBySuperAdmin(userName),
                         'bg-red-600 hover:bg-red-700'
                     );
                 });
             });
         }
         
-        function handleAddNewStudent() {
-            const studentName = newStudentNameInput.value.trim();
-            if (!studentName) {
-                showAlert('Nama siswa tidak boleh kosong.', 'error');
+        function handleCreateAccount() {
+            const nameInput = document.getElementById('new-account-name-input');
+            const roleSelect = document.getElementById('new-account-role-select');
+
+            const newName = nameInput.value.trim();
+            const newRole = roleSelect.value;
+
+            if (!newName) {
+                showAlert('Nama pengguna tidak boleh kosong.', 'error');
                 return;
             }
-            if (users.some(u => u.name.toLowerCase() === studentName.toLowerCase())) {
-                showAlert(`Akun dengan nama **${studentName}** sudah ada.`, 'error');
+            if (users.some(u => u.name.toLowerCase() === newName.toLowerCase())) {
+                showAlert(`Akun dengan nama **${newName}** sudah ada.`, 'error');
                 return;
             }
 
-            const newStudent = {
-                name: studentName,
-                role: 'user',
-                password: DEFAULT_STUDENT_PASSWORD
+            const newAccount = {
+                name: newName,
+                role: newRole,
+                password: DEFAULT_ACCOUNT_PASSWORD
             };
             
-            users.push(newStudent);
+            users.push(newAccount);
             saveUsers();
             
-            newStudentNameInput.value = '';
-            renderUserListForReset(); // Update the list
-            showAlert(`Akun siswa **${studentName}** berhasil dibuat. Password default: **'${DEFAULT_STUDENT_PASSWORD}'**`, 'success');
-        }
-        
-        function handleResetStudentPassword(userName) {
-            const success = updateUserPassword(userName, DEFAULT_STUDENT_PASSWORD);
-            if (success) {
-                showAlert(`Password akun **${userName}** berhasil direset menjadi **'${DEFAULT_STUDENT_PASSWORD}'**.`, 'success');
-            } else {
-                showAlert(`Gagal mereset password untuk ${userName}.`, 'error');
-            }
+            nameInput.value = ''; // Clear input
+            renderAllAccounts(); // Refresh the list
+            showAlert(`Akun **${newName}** (${newRole}) berhasil dibuat. Password default: **'${DEFAULT_ACCOUNT_PASSWORD}'**`, 'success');
         }
 
-        function handleDeleteStudentAccount(userName) {
-            const userIndex = users.findIndex(u => u.name === userName && u.role === 'user');
+        function handleDeleteAccountBySuperAdmin(userName) {
+            const userIndex = users.findIndex(u => u.name === userName);
             
             if (userIndex !== -1) {
+                const userRole = users[userIndex].role;
+                
                 // Remove user
                 users.splice(userIndex, 1);
                 
-                // Remove all appointments associated with that user
-                appointments = appointments.filter(app => app.studentName !== userName);
+                // If the deleted user was a student, remove all their appointments
+                if (userRole === 'user') {
+                    appointments = appointments.filter(app => app.studentName !== userName);
+                    saveAppointments();
+                }
                 
                 saveUsers();
-                saveAppointments();
-                renderUserListForReset(); // Refresh the list
+                renderAllAccounts(); // Refresh the list
                 
-                showAlert(`Akun siswa **${userName}** dan semua data terkait berhasil dihapus.`, 'success');
+                showAlert(`Akun **${userName}** berhasil dihapus.`, 'success');
             } else {
-                showAlert(`Gagal menghapus akun. Siswa **${userName}** tidak ditemukan.`, 'error');
+                showAlert(`Gagal menghapus akun. Pengguna **${userName}** tidak ditemukan.`, 'error');
             }
         }
         
@@ -1118,10 +1130,14 @@
                     studentNameHeader.textContent = currentUser;
                     showView('user-dashboard-view');
                     initializeUserDashboard();
-                } else {
+                } else if (currentRole === 'admin') {
                     adminNameHeader.textContent = currentUser;
                     showView('admin-dashboard-view');
                     initializeAdminDashboard();
+                } else if (currentRole === 'superadmin') {
+                    superAdminNameHeader.textContent = currentUser;
+                    showView('super-admin-dashboard-view');
+                    initializeSuperAdminDashboard();
                 }
             } else {
                 showAlert('Nama pengguna atau password salah.', 'error');
@@ -1156,19 +1172,9 @@
             }
         }
 
-
         function handleAdminLogin() {
             const name = document.getElementById('admin-name-input').value.trim();
             const password = document.getElementById('admin-password').value;
-            
-            if (password === ADMIN_BYPASS_TOKEN) {
-                 // Bypass login for demonstration purposes
-                 const adminUser = users.find(u => u.name.toLowerCase() === name.toLowerCase() && u.role === 'admin');
-                 if (adminUser) {
-                    handleLogin(adminUser.name, adminUser.password, 'admin');
-                    return;
-                 }
-            }
             handleLogin(name, password, 'admin');
         }
 
@@ -1212,15 +1218,21 @@
             renderAdminAppointments();
         }
         
+        function initializeSuperAdminDashboard() {
+            renderAllAccounts();
+        }
+        
         // --- Event Listeners ---
         
         // 1. Initial Login Selection
         document.getElementById('show-student-login-btn').addEventListener('click', () => showView('student-login-view'));
         document.getElementById('show-admin-login-btn').addEventListener('click', () => showView('admin-login-view'));
+        document.getElementById('show-super-admin-login-btn').addEventListener('click', () => showView('super-admin-login-view'));
 
         // 2. Back Buttons from Login Forms
         document.getElementById('student-back-btn').addEventListener('click', () => showView('login-view'));
         document.getElementById('admin-back-btn-from-login').addEventListener('click', () => showView('login-view'));
+        document.getElementById('super-admin-back-btn').addEventListener('click', () => showView('login-view'));
 
         // 3. Login Buttons
         document.getElementById('student-login-btn').addEventListener('click', () => {
@@ -1230,10 +1242,17 @@
         });
 
         document.getElementById('admin-login-btn').addEventListener('click', handleAdminLogin);
+        
+        document.getElementById('super-admin-login-btn').addEventListener('click', () => {
+            const name = document.getElementById('super-admin-name-input').value.trim();
+            const password = document.getElementById('super-admin-password').value;
+            handleLogin(name, password, 'superadmin');
+        });
 
         // 4. Logout Buttons
         document.getElementById('logout-btn').addEventListener('click', handleLogout);
         document.getElementById('admin-logout-btn').addEventListener('click', handleLogout);
+        document.getElementById('super-admin-logout-btn').addEventListener('click', handleLogout);
         
         // 5. User Tab Navigation
         document.querySelectorAll('#user-dashboard-view button[id^="tab-"]').forEach(btn => {
@@ -1280,8 +1299,6 @@
                 // Special rendering logic when switching tabs
                 if (targetId === 'admin-content-appointments') {
                     renderAdminAppointments();
-                } else if (targetId === 'admin-content-manage-accounts') {
-                    renderUserListForReset();
                 }
             });
         });
@@ -1296,8 +1313,8 @@
         // 9. Admin: Save Article
         document.getElementById('save-article-btn').addEventListener('click', handleSaveArticle);
         
-        // 10. Admin: Add New Student
-        addNewStudentBtn.addEventListener('click', handleAddNewStudent);
+        // 10. Super Admin: Create Account
+        createNewAccountBtn.addEventListener('click', handleCreateAccount);
         
         // 11. User: Change Password
         document.getElementById('update-password-btn').addEventListener('click', () => {
@@ -1321,3 +1338,6 @@
     </script>
 </body>
 </html>
+
+
+
