@@ -487,6 +487,12 @@
         // --- Helper Functions ---
         
         function showView(viewId) {
+            // BARU: Sembunyikan semua modal yang mungkin terbuka setiap kali halaman utama berganti.
+            // Ini memastikan tampilan bersih saat navigasi antara login/dasbor.
+            hideBookingConfirmation();
+            hideGenericConfirmation();
+            hideAlert();
+            
             document.querySelectorAll('.view').forEach(view => view.classList.add('hidden'));
             document.getElementById(viewId).classList.remove('hidden');
         }
@@ -560,6 +566,10 @@
         function hideGenericConfirmation() {
             genericConfirmationModal.classList.add('hidden');
             genericActionCallback = null;
+        }
+
+        function hideAlert() {
+            alertModal.classList.add('hidden');
         }
 
         // Handle generic confirmation click
@@ -1209,6 +1219,11 @@
         }
 
         function handleLogout() {
+            // BARU: Secara eksplisit sembunyikan semua modal sebelum proses logout.
+            hideBookingConfirmation();
+            hideGenericConfirmation();
+            hideAlert();
+
             currentUser = null;
             currentRole = null;
             showView('login-view');
@@ -1290,6 +1305,7 @@
                 // Tutup modal yang mungkin terbuka saat pindah tab
                 hideBookingConfirmation();
                 hideGenericConfirmation();
+                hideAlert();
 
                 const targetId = e.target.id.replace('tab-', 'content-');
                 document.querySelectorAll('#user-dashboard-view .tab-content').forEach(el => el.classList.add('hidden'));
@@ -1314,6 +1330,7 @@
         document.querySelectorAll('#admin-dashboard-view button[id^="admin-tab-"]').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 hideGenericConfirmation(); // Close any open confirmation modals
+                hideAlert();
                 const targetId = e.target.id.replace('admin-tab-', 'admin-content-');
                 document.querySelectorAll('#admin-dashboard-view .tab-content').forEach(el => el.classList.add('hidden'));
                 document.getElementById(targetId).classList.remove('hidden');
@@ -1338,7 +1355,7 @@
         bookingModalConfirmBtn.addEventListener('click', confirmAppointment);
         
         // 8. Custom Alert Modal Action
-        alertOkBtn.addEventListener('click', () => alertModal.classList.add('hidden'));
+        alertOkBtn.addEventListener('click', hideAlert);
 
         // 9. Admin: Save Article
         document.getElementById('save-article-btn').addEventListener('click', handleSaveArticle);
@@ -1368,7 +1385,3 @@
     </script>
 </body>
 </html>
-
-
-
-
