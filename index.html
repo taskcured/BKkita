@@ -1016,16 +1016,22 @@
                 const userDiv = document.createElement('div');
                 userDiv.className = 'flex justify-between items-center p-3 border-b last:border-b-0 hover:bg-gray-50';
 
-                const deleteButtonHTML = `<button class="delete-account-btn py-1 px-3 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-lg transition-colors" data-username="${user.name}">
-                                            🗑️ Hapus
-                                        </button>`;
+                // Super admin cannot delete or reset their own password from this view
+                const actionButtonsHTML = `<div class="flex space-x-2">
+                                            <button class="reset-password-btn py-1 px-3 bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold rounded-lg transition-colors" data-username="${user.name}">
+                                                🔑 Reset
+                                            </button>
+                                            <button class="delete-account-btn py-1 px-3 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-lg transition-colors" data-username="${user.name}">
+                                                🗑️ Hapus
+                                            </button>
+                                        </div>`;
                 
                 userDiv.innerHTML = `
                     <div>
                         <p class="font-medium text-gray-800">${user.name}</p>
                         <p class="text-xs font-semibold px-2 py-0.5 rounded-full inline-block ${roleClass}">${roleText}</p>
                     </div>
-                    ${deleteButtonHTML}
+                    ${(user.name.toLowerCase() !== currentUser.toLowerCase()) ? actionButtonsHTML : ''}
                 `;
                 return userDiv;
             };
@@ -1058,6 +1064,19 @@
                         confirmationText,
                         () => handleDeleteAccountBySuperAdmin(userName),
                         'bg-red-600 hover:bg-red-700'
+                    );
+                });
+            });
+
+            // Re-attach reset password listeners
+            document.querySelectorAll('.reset-password-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const userName = e.target.dataset.username;
+                    showGenericConfirmation(
+                        'Reset Sandi Akun',
+                        `Anda yakin ingin mereset sandi untuk **${userName}**? Sandi akan diubah kembali ke default (**'${DEFAULT_ACCOUNT_PASSWORD}'**).`,
+                        () => handleResetPasswordBySuperAdmin(userName),
+                        'bg-amber-500 hover:bg-amber-600' // Use amber color for reset action
                     );
                 });
             });
@@ -1114,6 +1133,17 @@
                 showAlert(`Akun **${userName}** berhasil dihapus.`, 'success');
             } else {
                 showAlert(`Gagal menghapus akun. Pengguna **${userName}** tidak ditemukan.`, 'error');
+            }
+        }
+
+        function handleResetPasswordBySuperAdmin(userName) {
+            const userIndex = users.findIndex(u => u.name === userName);
+            if (userIndex !== -1) {
+                users[userIndex].password = DEFAULT_ACCOUNT_PASSWORD;
+                saveUsers();
+                showAlert(`Sandi untuk akun **${userName}** telah berhasil direset ke default.`, 'success');
+            } else {
+                showAlert(`Gagal mereset sandi. Pengguna **${userName}** tidak ditemukan.`, 'error');
             }
         }
         
@@ -1338,6 +1368,7 @@
     </script>
 </body>
 </html>
+
 
 
 
